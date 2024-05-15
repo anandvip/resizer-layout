@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resizable Panels</title>
+  <style>
+    body,
+    html {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      display: flex;
+      height: 80%;
+      width: 100%;
+    }
+
+    .panel {
+      flex-grow: 1;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+    }
+
+    .left-panel {
+      background-color: #dfe6e9;
+    }
+
+    .right-panel {
+      background-color: #b2bec3;
+    }
+
+    .bottom-panel {
+      background-color: #74b9ff;
+      height: 20%;
+    }
+
+    .resizer {
+      background-color: #636e72;
+      width: 20px;
+      cursor: ew-resize;
+    }
+
+    #horizontal-resizer {
+      height: 20px;
+      cursor: ns-resize;
+      width: 100%;
+      margin-top: auto;
+    }
+  </style>
+</head>
+
+<body>
+<header><h2>resizer-layout</h2></header>
+  <div class="container">
+    <div class="panel left-panel"></div>
+    <div class="resizer" id="vertical-resizer"></div>
+    <div class="panel right-panel"></div>
+  </div>
+  <div class="resizer" id="horizontal-resizer"></div>
+  <div class="panel bottom-panel"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const verticalResizer = document.getElementById('vertical-resizer');
+      const horizontalResizer = document.getElementById('horizontal-resizer');
+      const container = document.querySelector('.container');
+      const bottomPanel = document.querySelector('.bottom-panel');
+      let isResizingVertical = false;
+      let isResizingHorizontal = false;
+      verticalResizer.addEventListener('mousedown', function(e) {
+        isResizingVertical = true;
+      });
+      horizontalResizer.addEventListener('mousedown', function(e) {
+        isResizingHorizontal = true;
+      });
+      document.addEventListener('mousemove', function(e) {
+        if (isResizingVertical) {
+          container.style.width = `${e.clientX}px`;
+        }
+        if (isResizingHorizontal) {
+          container.style.height = `${e.clientY}px`;
+          bottomPanel.style.height = `calc(100% - ${e.clientY}px)`;
+        }
+      });
+      document.addEventListener('mouseup', function(e) {
+        isResizingVertical = false;
+        isResizingHorizontal = false;
+      });
+    });
+  </script>
+</body>
+
+</html>
