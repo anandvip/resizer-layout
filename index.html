@@ -51,11 +51,19 @@
       width: 100%;
       margin-top: auto;
     }
+
+    footer,
+    header {
+      background-color: #373737;
+      color: #f6f6f6f6
+    }
   </style>
 </head>
 
 <body>
-<header><h2>resizer-layout</h2></header>
+  <header>
+    <h2>resizer-layout</h2>
+  </header>
   <div class="container">
     <div class="panel left-panel"></div>
     <div class="resizer" id="vertical-resizer"></div>
@@ -63,7 +71,9 @@
   </div>
   <div class="resizer" id="horizontal-resizer"></div>
   <div class="panel bottom-panel"></div>
-
+  <footer>
+    <sup>footer</sup>
+  </footer>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const verticalResizer = document.getElementById('vertical-resizer');
